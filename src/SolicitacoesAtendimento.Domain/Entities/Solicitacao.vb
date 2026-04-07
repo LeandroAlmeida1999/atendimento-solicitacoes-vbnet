@@ -15,8 +15,11 @@ Namespace SolicitacoesAtendimento.Domain.Entities
         Private Sub New()
         End Sub
 
-        Public Shared Function Criar(titulo As String, descricao As String, nomeSolicitante As String, prioridade As PrioridadeSolicitacao) 
-            As Solicitacao
+        Public Shared Function Criar(
+            titulo As String,
+            descricao As String,
+            nomeSolicitante As String,
+            prioridade As PrioridadeSolicitacao) As Solicitacao
 
             Dim solicitacao = New Solicitacao With {
                 .Titulo = NormalizarTextoObrigatorio(titulo, "O titulo da solicitacao e obrigatorio.", 150, "O titulo da solicitacao deve ter no maximo 150 caracteres."),
@@ -24,6 +27,40 @@ Namespace SolicitacoesAtendimento.Domain.Entities
                 .NomeSolicitante = NormalizarTextoObrigatorio(nomeSolicitante, "O nome do solicitante e obrigatorio."),
                 .DataCriacao = DateTime.Now,
                 .Status = StatusSolicitacao.Aberto,
+                .Prioridade = prioridade
+            }
+
+            solicitacao.ValidarPrioridade()
+
+            Return solicitacao
+        End Function
+
+        Public Shared Function Restaurar(
+            id As Integer,
+            titulo As String,
+            descricao As String,
+            nomeSolicitante As String,
+            dataCriacao As DateTime,
+            status As StatusSolicitacao,
+            prioridade As PrioridadeSolicitacao) As Solicitacao
+
+            If id <= 0 Then
+                Throw New DomainException("O identificador da solicitacao deve ser valido.")
+            End If
+
+            If dataCriacao = DateTime.MinValue Then
+                Throw New DomainException("A data de criacao da solicitacao deve ser valida.")
+            End If
+
+            ValidarStatus(status)
+
+            Dim solicitacao = New Solicitacao With {
+                .Id = id,
+                .Titulo = NormalizarTextoObrigatorio(titulo, "O titulo da solicitacao e obrigatorio.", 150, "O titulo da solicitacao deve ter no maximo 150 caracteres."),
+                .Descricao = NormalizarTextoObrigatorio(descricao, "A descricao da solicitacao e obrigatoria."),
+                .NomeSolicitante = NormalizarTextoObrigatorio(nomeSolicitante, "O nome do solicitante e obrigatorio."),
+                .DataCriacao = dataCriacao,
+                .Status = status,
                 .Prioridade = prioridade
             }
 

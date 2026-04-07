@@ -5,6 +5,7 @@ Imports SolicitacoesAtendimento.Domain.Enums
 Namespace SolicitacoesAtendimento.Application.DTOs
     Public Class SolicitacaoDetalhesDto
         Public Sub New()
+            
             Historicos = New List(Of HistoricoSolicitacaoDto)()
         End Sub
 
