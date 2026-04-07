@@ -1,20 +1,3 @@
-/*
-    Script manual - SQL Server
-    Projeto: SolicitacoesAtendimento
-
-    Mapeamento de enums (VB.NET -> banco):
-    StatusSolicitacao:
-        1 = Aberto
-        2 = EmAndamento
-        3 = Concluido
-        4 = Cancelado
-
-    PrioridadeSolicitacao:
-        1 = Baixa
-        2 = Media
-        3 = Alta
-*/
-
 IF OBJECT_ID(N'dbo.HistoricoSolicitacaoStatus', N'U') IS NOT NULL
 BEGIN
     DROP TABLE dbo.HistoricoSolicitacaoStatus;
@@ -87,12 +70,3 @@ GO
 CREATE INDEX IX_HistoricoSolicitacaoStatus_SolicitacaoId
     ON dbo.HistoricoSolicitacaoStatus(SolicitacaoId, DataAlteracao);
 GO
-
-/*
-    Observacoes rapidas:
-    - Os enums do dominio devem ser persistidos como INT.
-    - A aplicacao deve tratar atualizacao de status + insercao no historico
-      na mesma transacao.
-    - O banco aceita os valores de enum via CHECK constraints, mas a regra
-      de transicao de status continua sendo responsabilidade do dominio.
-*/
