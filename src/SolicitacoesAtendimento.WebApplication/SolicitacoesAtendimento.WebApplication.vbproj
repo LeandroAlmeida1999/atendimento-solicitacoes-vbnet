@@ -87,6 +87,7 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
     <Content Include="Pages\SolicitacaoCreate.aspx" />
     <Content Include="Pages\SolicitacaoDetails.aspx" />

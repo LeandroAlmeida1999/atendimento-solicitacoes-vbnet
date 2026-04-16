@@ -3,50 +3,72 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Atualizar Status</title>
+    <link href="../Content/site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <h1>Atualizar Status</h1>
-            <p>
+        <div class="page-shell">
+            <section class="hero-card">
+                <h1 class="hero-title">Atualizar Status</h1>
+                <p class="hero-subtitle">Aplique uma transicao de status e registre uma observacao opcional.</p>
+                <div class="actions-row">
                 <asp:HyperLink ID="lnkVoltar" runat="server" NavigateUrl="~/Pages/SolicitacaoList.aspx">Voltar para listagem</asp:HyperLink>
-                |
                 <asp:HyperLink ID="lnkDetalhes" runat="server">Ver detalhes</asp:HyperLink>
-            </p>
+                </div>
+            </section>
 
-            <asp:Label ID="lblMensagem" runat="server" EnableViewState="false" />
-            <asp:HiddenField ID="hfSolicitacaoId" runat="server" />
+            <section class="panel-card">
+                <asp:Label ID="lblMensagem" runat="server" EnableViewState="false" CssClass="message" />
+                <asp:HiddenField ID="hfSolicitacaoId" runat="server" />
 
-            <table>
-                <tr><th align="left">Titulo</th><td><asp:Literal ID="litTitulo" runat="server" /></td></tr>
-                <tr><th align="left">Solicitante</th><td><asp:Literal ID="litNomeSolicitante" runat="server" /></td></tr>
-                <tr><th align="left">Status atual</th><td><asp:Literal ID="litStatusAtual" runat="server" /></td></tr>
-                <tr><th align="left">Prioridade</th><td><asp:Literal ID="litPrioridade" runat="server" /></td></tr>
-            </table>
+                <dl class="info-grid" style="margin-bottom: 20px;">
+                    <div class="info-item">
+                        <dt>Titulo</dt>
+                        <dd><asp:Literal ID="litTitulo" runat="server" /></dd>
+                    </div>
+                    <div class="info-item">
+                        <dt>Solicitante</dt>
+                        <dd><asp:Literal ID="litNomeSolicitante" runat="server" /></dd>
+                    </div>
+                    <div class="info-item">
+                        <dt>Status atual</dt>
+                        <dd><asp:Literal ID="litStatusAtual" runat="server" /></dd>
+                    </div>
+                    <div class="info-item">
+                        <dt>Prioridade</dt>
+                        <dd><asp:Literal ID="litPrioridade" runat="server" /></dd>
+                    </div>
+                </dl>
 
-            <div>
-                <label for="ddlNovoStatus">Novo status</label><br />
-                <asp:DropDownList ID="ddlNovoStatus" runat="server" Width="220" />
-            </div>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="ddlNovoStatus">Novo status</label>
+                        <asp:DropDownList ID="ddlNovoStatus" runat="server" CssClass="text-select" />
+                    </div>
 
-            <div>
-                <label for="txtObservacao">Observacao</label><br />
-                <asp:TextBox ID="txtObservacao" runat="server" TextMode="MultiLine" Rows="4" Width="420" />
-            </div>
+                    <div class="field-full">
+                        <label for="txtObservacao">Observacao</label>
+                        <asp:TextBox ID="txtObservacao" runat="server" TextMode="MultiLine" Rows="4" CssClass="text-area" />
+                    </div>
+                </div>
 
-            <div style="margin-top: 16px;">
-                <asp:Button ID="btnSalvar" runat="server" Text="Atualizar status" />
-            </div>
+                <div class="button-row">
+                    <asp:Button ID="btnSalvar" runat="server" Text="Atualizar status" CssClass="btn btn-primary" />
+                </div>
+            </section>
 
-            <h2>Historico</h2>
-            <asp:GridView ID="gvHistorico" runat="server" AutoGenerateColumns="False" EmptyDataText="Nenhuma alteracao de status registrada." GridLines="Both">
-                <Columns>
-                    <asp:BoundField DataField="DataAlteracao" HeaderText="Data" DataFormatString="{0:dd/MM/yyyy HH:mm}" HtmlEncode="False" />
-                    <asp:BoundField DataField="StatusAnterior" HeaderText="Status anterior" />
-                    <asp:BoundField DataField="NovoStatus" HeaderText="Novo status" />
-                    <asp:BoundField DataField="Observacao" HeaderText="Observacao" />
-                </Columns>
-            </asp:GridView>
+            <section class="table-card">
+                <h2 class="section-title">Historico</h2>
+                <asp:GridView ID="gvHistorico" runat="server" AutoGenerateColumns="False" EmptyDataText="Nenhuma alteracao de status registrada." GridLines="None" CssClass="data-grid">
+                    <Columns>
+                        <asp:BoundField DataField="DataAlteracao" HeaderText="Data" DataFormatString="{0:dd/MM/yyyy HH:mm}" HtmlEncode="False" />
+                        <asp:BoundField DataField="StatusAnterior" HeaderText="Status anterior" />
+                        <asp:BoundField DataField="NovoStatus" HeaderText="Novo status" />
+                        <asp:BoundField DataField="Observacao" HeaderText="Observacao" />
+                    </Columns>
+                    <EmptyDataRowStyle CssClass="empty-text" />
+                </asp:GridView>
+            </section>
         </div>
     </form>
 </body>
